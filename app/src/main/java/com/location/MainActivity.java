@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LocationCallBack 
         setContentView(R.layout.activity_main);
         locationProvider = new LocationProvider(this);
         locationProvider.setLocationCallBack(this);
-        locationProvider.getLocationContinuesInBackground();
+        locationProvider.getLastLocation();
         text = findViewById(R.id.text);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LocationCallBack 
 
     @Override
     public void onFailure(int reqType, String errorMessage) {
-
+        text.setText(errorMessage);
     }
 
     @Override

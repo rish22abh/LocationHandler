@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -173,6 +174,16 @@ public class LocationProvider implements PubSubListener {
                                     mLocationCallBack.onSuccess(EnumClass.CallbackRequestType.CONTINUE_LOCATION, locationResult.getLocations().get(0));
                                 }
                                 break;
+                        }
+                    }
+
+                    @Override
+                    public void onLocationAvailability(LocationAvailability locationAvailability) {
+                        super.onLocationAvailability(locationAvailability);
+                        if (!locationAvailability.isLocationAvailable()) {
+                            Log.v(TAG, "Location not available.");
+                            mFusedLocationClient.removeLocationUpdates(this);
+                            mLocationCallBack.onFailure(mTaskEnableConst,"Location not available");
                         }
                     }
                 }, Looper.getMainLooper());
