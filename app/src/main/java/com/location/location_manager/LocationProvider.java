@@ -66,22 +66,36 @@ public class LocationProvider implements PubSubListener {
                 performPendingTask();
         }
     }
-
+    /*
+    * set the interval in which you want to get locations.
+    * */
     public void setIntervalTime(int intervalTime) {
         this.mIntervalTime = intervalTime;
     }
 
+    /*
+     * if a location is available sooner you can get it
+     * */
     public void setFasterIntervalTime(int fasterIntervalTime) {
         this.mFasterIntervalTime = fasterIntervalTime;
     }
 
+    /*
+    * The priority of the request is a strong hint to the LocationClient for which location sources to use.
+    * */
     public void setLocationPriority(@EnumClass.LocationPriority int locationPriority) {
         this.mLocationPriority = locationPriority;
     }
-
+    /*
+     * The priority of the request is a strong hint to the LocationClient for which location sources to use.
+     * */
     public void setLocationCallBack(LocationCallBack mLocationCallBack) {
         this.mLocationCallBack = mLocationCallBack;
     }
+
+    /*
+     * To get last location of device. If it last location not availabe it will fetch current location.
+     * */
 
     public void getLastLocation() {
         if (isAnyParamNull()) return;
@@ -89,12 +103,18 @@ public class LocationProvider implements PubSubListener {
         getLocation();
     }
 
+    /*
+     * To get location of device continuous after particular time.
+     * */
     public void getLocationContinues() {
         if (isAnyParamNull()) return;
         mTaskEnableConst = EnumClass.TaskDialogEnableConst.DIALOG_CONTINUE_LOCATION;
         getLocation();
     }
 
+    /*
+     * To get location of device continuous after particular time in background.
+     * */
     public void getLocationContinuesInBackground() {
         if (isAnyParamNull()) return;
         mTaskEnableConst = EnumClass.TaskDialogEnableConst.DIALOG_CONTINUE_LOCATION_BACKGROUND;
@@ -244,6 +264,9 @@ public class LocationProvider implements PubSubListener {
         PubSubForPermission.getInstance().removeListener();
     }
 
+    /*
+    * To stop conntinuous fetching of location
+    * */
     public void stopLocationFromBackground() {
         if (mbackgroundService != null) {
             startService(true);

@@ -20,13 +20,24 @@ public class MainActivity extends AppCompatActivity implements LocationCallBack 
     LocationProvider locationProvider;
     TextView text;
 
+    /*
+     * TODO
+     *  1.GeoCoder to get address
+     *  2.Distance between location in Km.
+     *  3.Stop continuous location on current thread
+     * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Entry point for location
         locationProvider = new LocationProvider(this);
         locationProvider.setLocationCallBack(this);
-        locationProvider.getLastLocation();
+        locationProvider.getLocationContinues();
+        // End point for location
+
         text = findViewById(R.id.text);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements LocationCallBack 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //Mandatory to avoid memory leak
         if (locationProvider != null)
             locationProvider.removeCallback();
     }

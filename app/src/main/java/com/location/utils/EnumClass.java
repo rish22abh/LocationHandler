@@ -12,10 +12,10 @@ public class EnumClass {
             LocationPriority.PRIORITY_LOW_POWER, LocationPriority.PRIORITY_NO_POWER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LocationPriority {
-        int PRIORITY_HIGH_ACCURACY = LocationRequest.PRIORITY_HIGH_ACCURACY;
-        int PRIORITY_BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
-        int PRIORITY_LOW_POWER = LocationRequest.PRIORITY_LOW_POWER;
-        int PRIORITY_NO_POWER = LocationRequest.PRIORITY_NO_POWER;
+        int PRIORITY_HIGH_ACCURACY = LocationRequest.PRIORITY_HIGH_ACCURACY; //to request the most accurate locations available.
+        int PRIORITY_BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY; //to request "block" level accuracy.
+        int PRIORITY_LOW_POWER = LocationRequest.PRIORITY_LOW_POWER; //to request "city" level accuracy.
+        int PRIORITY_NO_POWER = LocationRequest.PRIORITY_NO_POWER; //to request the best accuracy possible with zero additional power consumption.
     }
 
     @IntDef({PermissionConst.PERMISSIONS_LAST_LOCATION})
